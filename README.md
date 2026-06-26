@@ -53,16 +53,16 @@ python src/train.py `
   --samples data/processed/short_horizon_samples.npz `
   --model conv_transformer `
   --output-dir experiments/checkpoints/short_conv_transformer_seed42 `
-  --epochs 50 `
+  --epochs 100 `
   --batch-size 64 `
-  --patience 8 `
+  --patience 10 `
   --seed 42
 ```
 
 复现实验矩阵：
 
 ```powershell
-python src/run_experiments.py --epochs 50 --batch-size 64 --patience 8 --skip-existing
+python src/run_experiments.py --epochs 100 --batch-size 64 --patience 10 --skip-existing
 ```
 
 结果文件：

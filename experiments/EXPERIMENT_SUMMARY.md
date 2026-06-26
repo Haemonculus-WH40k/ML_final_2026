@@ -13,8 +13,8 @@
 - 训练/验证/测试划分：时间顺序 70% / 15% / 15%；
 - 随机种子：`42, 2026, 7, 13, 99`；
 - 每组任务和模型运行 5 次；
-- 最大 epoch：50；
-- early stopping patience：8；
+- 最大 epoch：100；
+- early stopping patience：10；
 - batch size：64；
 - optimizer：AdamW；
 - learning rate：0.001；

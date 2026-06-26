@@ -128,8 +128,8 @@ Transformer 模型先将输入特征投影到 `d_model` 维度，加入正弦位
 统一训练配置：
 
 - 随机种子：`42, 2026, 7, 13, 99`
-- 最大 epoch：50
-- early stopping patience：8
+- 最大 epoch：100
+- early stopping patience：10
 - batch size：64
 - optimizer：AdamW
 - learning rate：0.001

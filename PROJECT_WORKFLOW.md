@@ -397,6 +397,14 @@ python src/plot_predictions.py `
 | 长期 365 天 | `long_horizon_samples.npz` | `transformer` | 5 |
 | 长期 365 天 | `long_horizon_samples.npz` | `conv_transformer` | 5 |
 
+正式实验训练配置：
+
+- 最大 epoch：100；
+- early stopping patience：10；
+- batch size：64；
+- learning rate：0.001；
+- weight decay：0.0001。
+
 推荐输出目录命名：
 
 ```text
