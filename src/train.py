@@ -16,7 +16,7 @@ except ImportError as exc:  # pragma: no cover
 from models.improved_model import ConvTransformerForecaster
 from models.lstm import LSTMForecaster
 from models.transformer import TransformerForecaster
-from utils.metrics import summarize_metrics
+from utils.metrics import inverse_target_scale, summarize_forecast_metrics
 from utils.seed import set_seed
 
 
@@ -25,6 +25,13 @@ MODEL_REGISTRY = {
     "transformer": TransformerForecaster,
     "conv_transformer": ConvTransformerForecaster,
 }
+
+
+def _serializable_args(args: argparse.Namespace) -> dict:
+    output = {}
+    for key, value in vars(args).items():
+        output[key] = str(value) if isinstance(value, Path) else value
+    return output
 
 
 def _tensor_pair(data: np.lib.npyio.NpzFile, split: str) -> TensorDataset:
@@ -79,6 +86,10 @@ def train(args: argparse.Namespace) -> None:
     data = np.load(args.samples, allow_pickle=True)
     feature_dim = data["x_train"].shape[-1]
     horizon = int(data["horizon"])
+    feature_names = data["feature_names"]
+    target_name = str(np.asarray(data["target_name"]).item())
+    scaler_mean = data["scaler_mean"]
+    scaler_scale = data["scaler_scale"]
     device = torch.device(args.device if torch.cuda.is_available() else "cpu")
 
     model_class = MODEL_REGISTRY[args.model]
@@ -127,7 +138,7 @@ def train(args: argparse.Namespace) -> None:
         if val_loss < best_val:
             best_val = val_loss
             patience_left = args.patience
-            torch.save({"model_state": model.state_dict(), "args": vars(args)}, best_path)
+            torch.save({"model_state": model.state_dict(), "args": _serializable_args(args)}, best_path)
         else:
             patience_left -= 1
             if patience_left <= 0:
@@ -136,12 +147,46 @@ def train(args: argparse.Namespace) -> None:
     checkpoint = torch.load(best_path, map_location=device)
     model.load_state_dict(checkpoint["model_state"])
     test_prediction, test_target = predict(model, test_loader, device)
-    metrics = summarize_metrics(test_prediction, test_target)
+    test_prediction_original = inverse_target_scale(
+        test_prediction, feature_names, scaler_mean, scaler_scale, target_name
+    )
+    test_target_original = inverse_target_scale(
+        test_target, feature_names, scaler_mean, scaler_scale, target_name
+    )
+    metrics = summarize_forecast_metrics(
+        test_prediction,
+        test_target,
+        feature_names,
+        scaler_mean,
+        scaler_scale,
+        target_name,
+    )
+    metrics.update(
+        {
+            "best_val_loss": best_val,
+            "epochs_ran": len(history),
+            "horizon": horizon,
+            "model": args.model,
+            "seed": args.seed,
+        }
+    )
 
     np.savez_compressed(
         output_dir / "test_predictions_scaled.npz",
         prediction=test_prediction,
         target=test_target,
+    )
+    np.savez_compressed(
+        output_dir / "test_predictions.npz",
+        prediction=test_prediction_original,
+        target=test_target_original,
+        prediction_scaled=test_prediction,
+        target_scaled=test_target,
+        feature_names=feature_names,
+        target_name=np.asarray(target_name),
+        scaler_mean=scaler_mean,
+        scaler_scale=scaler_scale,
+        horizon=np.asarray(horizon),
     )
     (output_dir / "history.json").write_text(json.dumps(history, indent=2), encoding="utf-8")
     (output_dir / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
