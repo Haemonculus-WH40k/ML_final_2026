@@ -1,0 +1,171 @@
+{
+  "source_path": "C:\\Users\\Administrator\\Desktop\\ML_final\\data\\raw\\weather\\MENSQ_92_previous-1950-2024.csv.gz",
+  "output_path": "C:\\Users\\Administrator\\Desktop\\ML_final\\data\\processed\\weather_monthly_normalized.csv",
+  "aggregation": "mean across available stations in the monthly department file",
+  "rr_transform": "RR divided by 10 according to the course handout",
+  "missing_before_fill": {
+    "RR": 0,
+    "NBJRR1": 0,
+    "NBJRR5": 0,
+    "NBJRR10": 0,
+    "NBJBROU": 625
+  },
+  "missing_after_fill": {
+    "RR": 0,
+    "NBJRR1": 0,
+    "NBJRR5": 0,
+    "NBJRR10": 0,
+    "NBJBROU": 0
+  },
+  "station_count": 20,
+  "stations": [
+    {
+      "NUM_POSTE": 92002001,
+      "NOM_USUEL": "ANTONY-TOURVOIE",
+      "LAT": 48.753333,
+      "LON": 2.298333,
+      "ALTI": 55
+    },
+    {
+      "NUM_POSTE": 92002002,
+      "NOM_USUEL": "ANTONY",
+      "LAT": 48.756667,
+      "LON": 2.295,
+      "ALTI": 80
+    },
+    {
+      "NUM_POSTE": 92007001,
+      "NOM_USUEL": "BAGNEUX",
+      "LAT": 48.809667,
+      "LON": 2.308167,
+      "ALTI": 82
+    },
+    {
+      "NUM_POSTE": 92019001,
+      "NOM_USUEL": "CHATENAY",
+      "LAT": 48.771667,
+      "LON": 2.275,
+      "ALTI": 104
+    },
+    {
+      "NUM_POSTE": 92023001,
+      "NOM_USUEL": "CLAMART",
+      "LAT": 48.778333,
+      "LON": 2.231667,
+      "ALTI": 167
+    },
+    {
+      "NUM_POSTE": 92023003,
+      "NOM_USUEL": "CLAMART-BECLERE",
+      "LAT": 48.786667,
+      "LON": 2.256667,
+      "ALTI": 170
+    },
+    {
+      "NUM_POSTE": 92025001,
+      "NOM_USUEL": "COLOMBES",
+      "LAT": 48.925167,
+      "LON": 2.255333,
+      "ALTI": 29
+    },
+    {
+      "NUM_POSTE": 92026001,
+      "NOM_USUEL": "COURBEVOIE",
+      "LAT": 48.898167,
+      "LON": 2.230667,
+      "ALTI": 51
+    },
+    {
+      "NUM_POSTE": 92032001,
+      "NOM_USUEL": "FONTENAY - CEN",
+      "LAT": 48.788167,
+      "LON": 2.276333,
+      "ALTI": 159
+    },
+    {
+      "NUM_POSTE": 92032002,
+      "NOM_USUEL": "FONTENAY - EN",
+      "LAT": 48.788333,
+      "LON": 2.291667,
+      "ALTI": 86
+    },
+    {
+      "NUM_POSTE": 92044001,
+      "NOM_USUEL": "LEVALLOIS",
+      "LAT": 48.896667,
+      "LON": 2.288333,
+      "ALTI": 30
+    },
+    {
+      "NUM_POSTE": 92048001,
+      "NOM_USUEL": "MEUDON",
+      "LAT": 48.812,
+      "LON": 2.228,
+      "ALTI": 160
+    },
+    {
+      "NUM_POSTE": 92050001,
+      "NOM_USUEL": "NANTERRE",
+      "LAT": 48.878333,
+      "LON": 2.216667,
+      "ALTI": 98
+    },
+    {
+      "NUM_POSTE": 92050002,
+      "NOM_USUEL": "NANTERRE -FOLIE",
+      "LAT": 48.89,
+      "LON": 2.208333,
+      "ALTI": 28
+    },
+    {
+      "NUM_POSTE": 92050003,
+      "NOM_USUEL": "NANTERRE - EC",
+      "LAT": 48.89,
+      "LON": 2.208333,
+      "ALTI": 32
+    },
+    {
+      "NUM_POSTE": 92064001,
+      "NOM_USUEL": "ST-CLOUD",
+      "LAT": 48.853333,
+      "LON": 2.208333,
+      "ALTI": 110
+    },
+    {
+      "NUM_POSTE": 92071001,
+      "NOM_USUEL": "SCEAUX",
+      "LAT": 48.768333,
+      "LON": 2.291667,
+      "ALTI": 60
+    },
+    {
+      "NUM_POSTE": 92071002,
+      "NOM_USUEL": "SCEAUX",
+      "LAT": 48.78,
+      "LON": 2.29,
+      "ALTI": 90
+    },
+    {
+      "NUM_POSTE": 92073001,
+      "NOM_USUEL": "SURESNES",
+      "LAT": 48.871333,
+      "LON": 2.235333,
+      "ALTI": 28
+    },
+    {
+      "NUM_POSTE": 92076001,
+      "NOM_USUEL": "VAUCRESSON",
+      "LAT": 48.843333,
+      "LON": 2.155,
+      "ALTI": 162
+    }
+  ],
+  "columns": [
+    "month",
+    "RR",
+    "NBJRR1",
+    "NBJRR5",
+    "NBJRR10",
+    "NBJBROU"
+  ]
+}

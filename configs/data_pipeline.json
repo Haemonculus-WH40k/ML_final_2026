@@ -1,0 +1,18 @@
+{
+  "raw_power_path": "household_power_consumption.txt",
+  "weather_path": "data/raw/weather/MENSQ_92_previous-1950-2024.csv.gz",
+  "daily_power_path": "data/processed/daily_power.csv",
+  "daily_merged_path": "data/processed/daily_power_weather.csv",
+  "short_samples_path": "data/processed/short_horizon_samples.npz",
+  "long_samples_path": "data/processed/long_horizon_samples.npz",
+  "scaler_path": "data/processed/feature_scaler.json",
+  "min_minutes_per_day": 1000,
+  "input_length": 90,
+  "short_horizon": 90,
+  "long_horizon": 365,
+  "split_ratios": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  }
+}

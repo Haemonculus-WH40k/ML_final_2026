@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.agents/
+.codex/
+
+experiments/logs/
+experiments/checkpoints/
+experiments/figures/
+*.pt
+*.pth
